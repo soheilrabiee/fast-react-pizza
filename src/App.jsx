@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./ui/Home";
+import Error from "./ui/Error";
 import Menu, { loader as menuLoader } from "./features/menu/Menu";
 import Cart from "./features/cart/Cart";
 import CreateOrder from "./features/order/CreateOrder";
@@ -11,6 +12,9 @@ const router = createBrowserRouter([
     {
         // Layout route (route without a path)
         element: <AppLayout />,
+        // All errors bubble up to the parent if they are not handled in their own route
+        // Shows the error in a new page
+        errorElement: <Error />,
         children: [
             {
                 path: "/",
@@ -19,7 +23,9 @@ const router = createBrowserRouter([
             {
                 path: "/menu",
                 element: <Menu />,
+                // Shows the error within the layout
                 loader: menuLoader,
+                errorElement: <Error />,
             },
             {
                 path: "/cart",
