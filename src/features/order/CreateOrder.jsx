@@ -84,7 +84,7 @@ function CreateOrder() {
           {/* A trick to pass data into the form without fields */}
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
 
-          <Button disabled={isSubmitting}>
+          <Button disabled={isSubmitting} type="primary">
             {isSubmitting ? 'Placing order' : 'Order now'}
           </Button>
         </div>
