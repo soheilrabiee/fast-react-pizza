@@ -39,6 +39,8 @@ const cartSlice = createSlice({
 
       item.quantity--;
       item.totalPrice = item.quantity * item.unitPrice;
+
+      if (item.quantity === 0) cartSlice.caseReducers.deleteItem(state, action);
     },
     clearCart(state) {
       state.cart = [];
@@ -68,5 +70,6 @@ export const getCart = (state) => state.cart.cart;
 
 export const getUsername = (state) => state.user.username;
 
+// Currying arrow function (because of the fact that selector function only receives one argument and that is the state)
 export const getCurrentQuantityById = (id) => (state) =>
   state.cart.cart.find((item) => item.pizzaId === id)?.quantity ?? 0;
